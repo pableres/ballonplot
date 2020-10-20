@@ -1,0 +1,21 @@
+library(ggplot2)
+
+setwd('C:/Users/pable/Desktop/Escritorio antiguo/ETI SR')
+ballon <- read_excel("ballon.xlsx")
+dfballon <-as.data.frame(ballon)
+
+ballon<- ballon[complete.cases(ballon), ]
+
+dfballon$sex<-as.factor(dfballon$sex)
+levels(dfballon$sex) <- c("Men", "Women")
+dfballon
+dfballon$items <- factor(dfballon$items, levels = c( "Forced to kiss someone in sexual way", "Forced to perform oral sex", "Someone had genital sex against your will",  "Forced to touch intimate parts" ,  "Someone rubbing genitals against you", "Touched in intimate parts in way that was uncomfortable" , "Parents fail to understand your needs" ,  "Most of the time treated in cold or uncaring way", "Often told you are no good", "Often ignored or made to feel you didn't count", "Often put down or ridiculed" ,  "Pushed or shoved", "Hit with thrown object" , "Punched or kicked" , "Burned with cigarette" ,  "Slapped in the face" , "See someone murdered", "Alcoholic parents", "Family mental illness" ,  "Witnessing violence" , "Serious injury of friend",  "Serious illness/injury of sibling", "Separation of parents", "Serious injury/illness of parent",  "Serious personal injury", "Serious accident", "Natural disaster"))
+
+
+f1<-ggballoonplot(dfballon, x = "var", y = "items", size = "perc",
+                  fill = "perc", facet.by = "sex",
+                  ggtheme = theme_bw()) +
+  scale_fill_viridis_c(option = "C")
+
+f1
+f1+geom_text(aes(label=perc), hjust=2, alpha=1.0, size=3)
