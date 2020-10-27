@@ -1,4 +1,4 @@
-library(ggplot2)
+library(ggpubr)
 
 setwd('C:/Users/pable/Desktop/Escritorio antiguo/ETI SR')
 ballon <- read_excel("ballon.xlsx")
